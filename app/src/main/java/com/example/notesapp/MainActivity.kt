@@ -59,9 +59,19 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController = navController, startDestination = "NotesScreen"){
                         composable("NotesScreen"){
-
+                               NotesScreen(
+                                   state=state,
+                                   navController=navController,
+                                   onEvent=viewModel::onEvent
+                               )
                         }
-                        composable("NotesScreen"){
+                        composable("addNotesScreen"){
+
+                            NotesScreen(
+                                state=state,
+                                navController=navController,
+                                onEvent=viewModel::onEvent
+                            )
 
                         }
 
