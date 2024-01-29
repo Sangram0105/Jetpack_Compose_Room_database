@@ -24,24 +24,26 @@ import com.example.notesapp.data.NotesDatabase
 import com.example.notesapp.ui.theme.NotesAppTheme
 
 
-private val database by lazy {
-    Room.databaseBuilder(
-        applicationContext,
-        NotesDatabase::class.java,
-        "notes.db"
-    ).build()
-}
 
-private val viewModel by viewModels<NotesViewModel> (
-    factoryProducer = {
-        object : ViewModelProvider.Factory {
-            override fun<T: ViewModel> create(modelClass: Class<T>): T {
-                return NotesViewModel(database.dao) as T
+class MainActivity : ComponentActivity() {
+
+    private val database by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            NotesDatabase::class.java,
+            "notes.db"
+        ).build()
+    }
+
+    private val viewModel by viewModels<NotesViewModel> (
+        factoryProducer = {
+            object : ViewModelProvider.Factory {
+                override fun<T: ViewModel> create(modelClass: Class<T>): T {
+                    return NotesViewModel(database.dao) as T
+                }
             }
         }
-    }
-)
-class MainActivity : ComponentActivity() {
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
